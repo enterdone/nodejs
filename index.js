@@ -1,5 +1,5 @@
 const http = require('http');
-const {telegraf} = require('telegraf');
+const {Telegraf} = require('telegraf');
 const axios = require("axios");
 const NLPCloudClient = require('nlpcloud');
 const PORT = 3000;
