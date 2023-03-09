@@ -6,7 +6,7 @@ const PORT = 3000;
 
 const client = new NLPCloudClient('nllb-200-3-3b','9f72fe17e00647b14876ae5f9190164d792136c1', false)
 // //Create a Bot
-const bot = new telegraf('6146123360:AAHvpSjgBSxzBgjo7I3issQjOJg2x7G2SMg')
+const bot = new Telegraf('6146123360:AAHvpSjgBSxzBgjo7I3issQjOJg2x7G2SMg')
 
 //Do something when start command was executed
 bot.start(ctx => {
