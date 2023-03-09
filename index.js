@@ -1,12 +1,13 @@
-const http = require('http');
+// const http = require('http');
 const {Telegraf} = require('telegraf');
 const axios = require("axios");
 const NLPCloudClient = require('nlpcloud');
-const PORT = 3000;
+const { marked } = require ('marked') //formatting
+// const PORT = 3000;
 
-const client = new NLPCloudClient('nllb-200-3-3b','9f72fe17e00647b14876ae5f9190164d792136c1', false)
+const client = new NLPCloudClient('nllb-200-3-3b','fe7e819e6465ca4b03c559bdb55b232f9100948d', false)
 // //Create a Bot
-const bot = new Telegraf('6146123360:AAHvpSjgBSxzBgjo7I3issQjOJg2x7G2SMg')
+const bot = new Telegraf('6146123360:AAFO12u05KpnK5V8A47-eHQxiGEzZgSL8gI')
 
 //Do something when start command was executed
 bot.start(ctx => {
@@ -28,7 +29,7 @@ bot.command("my", (ctx)=>{ctx.reply(`${JSON.stringify(ctx.update).replace(/,/g, 
 
 
 
-const { marked } = require ('marked')
+
 bot.help((ctx) => {
   ctx.replyWithHTML(marked.parseInline(`Hello,
 
@@ -50,6 +51,8 @@ What?
 
 bot.on('message', (ctx)=>{
 // ctx.telegram.sendCopy(ctx.chat.id , ctx.message)
+console.log('bot.on(message', ctx.message.text);
+
   client.translation(
     `${ctx.message.text}`,
     'eng_Latn',"rus_Cyrl"
@@ -66,6 +69,7 @@ bot.on('message', (ctx)=>{
            
  ` , ctx))
 }).catch(function (err) {
+  
     console.error(err.response.status);
     console.error(err.response.data.detail);
 });
@@ -83,7 +87,7 @@ bot.on('message', (ctx)=>{
 // });
 
   console.log(ctx.message.text, '================================================');
-  setTimeout(()=>console.log("timeout"), 10000)
+  setTimeout(()=>console.log("timeout"), 1000)
 })
 bot.launch()
 .then((res) =>{
@@ -96,21 +100,31 @@ console. log (error);
 
 
 
-bot.launch().then(() => {
-        console.log("Logged as "+bot.context.botInfo.first_name)
-        //If it's shows your bot name, Then try execute /start Command, Enjoy!
-});
+// bot.launch().then(() => {
+//         console.log("Logged as "+bot.context.botInfo.first_name)
+//         //If it's shows your bot name, Then try execute /start Command, Enjoy!
+// });
 
 
 
 
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello  !');
-});
+// const server = http.createServer((req, res) => {
+//   res.statusCode = 200;
+//   res.setHeader('Content-Type', 'text/plain');
+//   res.end('Hello  !');
+// });
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}/`);
+// server.listen(PORT, () => {
+//   console.log(`Server running at http://localhost:${PORT}/`);
+// });
+
+
+
+client.translation(`TRY TRANSLATE FUCK FUCK`,'eng_Latn','fra_Latn').then(function (response) {
+  console.log(response.data);
+})
+.catch(function (err) {
+  console.error(err.response.status);
+  console.error(err.response.data.detail);
 });
