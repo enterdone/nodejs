@@ -12,7 +12,6 @@ const bot = new Telegraf('6146123360:AAFO12u05KpnK5V8A47-eHQxiGEzZgSL8gI')
 //Do something when start command was executed
 bot.start(ctx => {
 //Yes, you need callback son.
-
 //Send a message when /start command has executed
 ctx.reply('этот бот нихуя не умеет, умеет только перевод прислать с английского.')
   .then(setTimeout(()=>ctx.reply('*всрато'), 3000))
@@ -29,7 +28,7 @@ bot.command("my", (ctx)=>{ctx.reply(`${JSON.stringify(ctx.update).replace(/,/g, 
 
 
 
-
+//help command 
 bot.help((ctx) => {
   ctx.replyWithHTML(marked.parseInline(`Hello,
 
@@ -48,7 +47,7 @@ What?
 
 
 
-
+//bot - answer 
 bot.on('message', (ctx)=>{
 // ctx.telegram.sendCopy(ctx.chat.id , ctx.message)
 console.log('bot.on(message', ctx.message.text);
@@ -69,7 +68,7 @@ console.log('bot.on(message', ctx.message.text);
            
  ` , ctx))
 }).catch(function (err) {
-  
+
     console.error(err.response.status);
     console.error(err.response.data.detail);
 });
